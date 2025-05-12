@@ -1,0 +1,51 @@
+{
+  "name": "playwright-sniff",
+  "version": "0.1.0",
+  "description": "Monitoring library for Playwright that measures action times, catches showstoppers and generates reports",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "playwright test",
+    "lint": "eslint src/**/*.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "playwright",
+    "monitoring",
+    "performance",
+    "testing",
+    "automation",
+    "report",
+    "sniffing"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/playwright-sniff.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/playwright-sniff/issues"
+  },
+  "homepage": "https://github.com/yourusername/playwright-sniff#readme",
+  "peerDependencies": {
+    "@playwright/test": ">=1.20.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "@types/node": "^20.8.7",
+    "@typescript-eslint/eslint-plugin": "^6.8.0",
+    "@typescript-eslint/parser": "^6.8.0",
+    "eslint": "^8.52.0",
+    "typescript": "^5.8.3"
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
