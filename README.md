@@ -228,6 +228,10 @@ interface SniffReport {
 }
 ```
 
+### HTML Report
+
+
+
 ## License
 
 MIT

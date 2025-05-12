@@ -254,12 +254,12 @@ public saveReport(outputFile?: string): string {
   return filePath;
 }
 
-public generateHTMLReport(outputFile?: string): void {
+public generateHTMLReport(outputHTML?: string): void {
   let reportData: TestReport;
-  const filePath = outputFile || this.options.outputHTML;
-
+  const filePath = outputHTML || this.options.outputHTML;
+  const jsonFilePath = this.options.outputFile;
   try {
-      const rawData = fs.readFileSync(filePath, 'utf-8')
+      const rawData = fs.readFileSync(jsonFilePath, 'utf-8')
       reportData = JSON.parse(rawData)
   } catch (error) {
       this.logger(`Error reading existing json report: ${error}`, LogLevel.ERROR);
@@ -268,7 +268,7 @@ public generateHTMLReport(outputFile?: string): void {
 
   const html = generateReportHTML(reportData)
   fs.writeFileSync(filePath, html)
-  
+
   this.logger(`HTML Report generated at ${filePath}`, LogLevel.INFO);
 }
 
