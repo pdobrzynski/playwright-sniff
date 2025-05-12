@@ -36,7 +36,10 @@ test('Monitor performance', async ({ page }) => {
   );
   
   await sniff.measureAction(
-    async () => { await page.getByRole('button').click() },
+    async () => { 
+      await page.getByRole('button').click() 
+      await expect(page.getByRole('heading', { name: 'Welcome!' })).toBeVisible()
+    },
     'Click login button'
   );
   
