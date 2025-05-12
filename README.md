@@ -36,7 +36,7 @@ test('Monitor performance', async ({ page }) => {
   );
   
   await sniff.measureAction(
-    async () => { await page.click('button.login') },
+    async () => { await page.getByRole('button').click() },
     'Click login button'
   );
   
@@ -114,6 +114,7 @@ test('Example test with sniffing', async ({ page, sniff }) => {
 
   // You can add custom showstoppers
   await sniff.addShowStopper('Manual check', 'Found an issue during manual verification');
+
   // Rest of your test...
 });
 ```
