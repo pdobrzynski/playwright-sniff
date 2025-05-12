@@ -1,6 +1,6 @@
 import {test as base} from "@playwright/test"
-import { SniffOptions } from "./types";
-import { PlaywrightSniff } from "./monitor";
+import { SniffOptions } from "../src/types";
+import { PlaywrightSniff } from "../src/monitor";
 
 export const test = base.extend<{
   sniffOptions: Required<SniffOptions>;

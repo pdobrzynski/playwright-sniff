@@ -1,5 +1,5 @@
 import { PlaywrightSniff } from '../src';
-import { test, expect } from '../src/sniff-fixture';
+import { test, expect } from './sniff-fixture';
 
 test.describe('Example using playwright-sniff', () => {
   let sniff: PlaywrightSniff;
