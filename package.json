@@ -23,12 +23,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/playwright-sniff.git"
+    "url": "git+https://github.com/pdobrzynski/playwright-sniff.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/playwright-sniff/issues"
+    "url": "https://github.com/pdobrzynski/playwright-sniff/issues"
   },
-  "homepage": "https://github.com/yourusername/playwright-sniff#readme",
+  "homepage": "https://github.com/pdobrzynski/playwright-sniff#readme",
   "peerDependencies": {
     "@playwright/test": ">=1.20.0"
   },
