@@ -1,6 +1,6 @@
 # playwright-sniff
 
-A monitoring library for Playwright that measures action times, catches showstoppers, and generates comprehensive reports.
+A monitoring library for Playwright that measures action times, catches showstoppers, and generates comprehensive reports. By default, it collects showstoppers throughout test execution rather than failing immediately, displaying all issues in a consolidated report at the end.
 
 ## Features
 
