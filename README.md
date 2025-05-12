@@ -196,6 +196,18 @@ interface ShowStopper {
 }
 ```
 
+#### `Failures`
+
+```typescript
+interface Failure {
+  error: string | undefined;                // Error description
+  type: 'console' | 'request' | 'custom';   // Type of failure
+  requestUrl?: string;                      // URL of the request
+  requestStatus?: number | null;            // Status code of the request
+  requestMethod?: string;                   // HTTP method of the request
+}
+```
+
 #### `SniffReport`
 
 Complete report structure returned by `getResults()`.
