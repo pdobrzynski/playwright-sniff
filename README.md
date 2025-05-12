@@ -198,6 +198,8 @@ interface ShowStopper {
 
 #### `Failures`
 
+Non-critical fails like console error or 4xx request
+
 ```typescript
 interface Failure {
   error: string | undefined;                // Error description
