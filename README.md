@@ -229,6 +229,7 @@ interface SniffReport {
 ```
 
 ### HTML Report
+![htmlreport](https://github.com/user-attachments/assets/2e041b0d-1c83-4ec8-a128-82280c99b9fd)
 
 
 
