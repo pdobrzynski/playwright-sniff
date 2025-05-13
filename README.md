@@ -1,4 +1,4 @@
-# playwright-sniff
+![image](https://github.com/user-attachments/assets/5fbc8a6d-0585-4aa9-82a3-107492cf44bb)# playwright-sniff
 
 A monitoring library for Playwright that measures action times, catches showstoppers, and generates comprehensive reports. By default, it collects showstoppers throughout test execution rather than failing immediately, displaying all issues in a consolidated report at the end.
 
@@ -6,6 +6,7 @@ A monitoring library for Playwright that measures action times, catches showstop
 
 - 📊 **Performance Monitoring**: Track execution time for Playwright actions
 - 🚨 **Showstopper Detection**: Identify and log critical issues
+- ❌ **Background's failures**: Log non-critical issues like console errors or 4xx requests
 - 📝 **Report Generation**: Create detailed reports of test execution performance
 - 🔄 **Low Overhead**: Minimal impact on your existing Playwright tests
 - 🌐 **Network Monitoring**: Track HTTP requests and detect slow or failed requests
