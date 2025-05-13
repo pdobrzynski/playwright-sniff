@@ -6,7 +6,6 @@ A monitoring library for Playwright that measures action times, catches showstop
 
 - 📊 **Performance Monitoring**: Track execution time for Playwright actions
 - 🚨 **Showstopper Detection**: Identify and log critical issues
-- ❌ **Background's failures**: Log non-critical issues like console errors or 4xx requests
 - 📝 **Report Generation**: Create detailed reports of test execution performance
 - 🔄 **Low Overhead**: Minimal impact on your existing Playwright tests
 - 🌐 **Network Monitoring**: Track HTTP requests and detect slow or failed requests
