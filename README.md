@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/5fbc8a6d-0585-4aa9-82a3-107492cf44bb)# playwright-sniff
+# playwright-sniff
 
 A monitoring library for Playwright that measures action times, catches showstoppers, and generates comprehensive reports. By default, it collects showstoppers throughout test execution rather than failing immediately, displaying all issues in a consolidated report at the end.
 
