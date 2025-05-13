@@ -5,7 +5,7 @@ A monitoring library for Playwright that measures action times, catches showstop
 ## Features
 
 - 📊 **Performance Monitoring**: Track execution time for Playwright actions
-- 🚨 **Showstopper Detection**: Identify and log critical issues that block test execution
+- 🚨 **Showstopper Detection**: Identify and log critical issues
 - 📝 **Report Generation**: Create detailed reports of test execution performance
 - 🔄 **Low Overhead**: Minimal impact on your existing Playwright tests
 - 🌐 **Network Monitoring**: Track HTTP requests and detect slow or failed requests
@@ -17,6 +17,8 @@ npm install playwright-sniff
 ```
 
 ## Basic Usage
+
+By default, showstoppers are all failed actions used in `measureAction()` and requests that returns 5xx status code.
 
 ```typescript
 import { test } from '@playwright/test';
