@@ -1,6 +1,6 @@
 {
   "name": "playwright-sniff",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Monitoring library for Playwright that measures action times, catches showstoppers and generates reports",
   "main": "index.ts",
   "types": "src/types.ts",
