@@ -45,7 +45,7 @@ test('Monitor performance', async ({ page }) => {
 });
 ```
 
-## Integration with Playwright Tests (Recommended)
+## Integration with Playwright Test (Recommended)
 
 ```typescript
 import { test as base } from '@playwright/test';
