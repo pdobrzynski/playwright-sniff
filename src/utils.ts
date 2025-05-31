@@ -4,7 +4,7 @@ import { LogLevel } from './types';
 /**
  * Current version of the library
  */
-export const VERSION = '0.1.0';
+export const VERSION = '1.0.0';
 
 /**
  * Clean an error message by removing ANSI codes and truncating
@@ -51,7 +51,7 @@ export function formatDuration(ms: number): string {
  * Format a date to a readable string
  */
 export function formatDate(date: Date): string {
-  return date.toISOString().replace('T', ' ').substr(0, 19);
+  return date.toISOString().replace('T', ' ').substring(0, 19);
 }
 
 /**

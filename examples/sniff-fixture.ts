@@ -39,8 +39,8 @@ export const test = base.extend<{
     await use(sniff);
     
     // Capture and save final stats
-    sniff.saveReport();
-    sniff.generateHTMLReport();
+    // sniff.saveReport();
+    // sniff.generateHTMLReport();
     sniff.stop();
   }
 });

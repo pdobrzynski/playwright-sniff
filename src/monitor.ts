@@ -99,8 +99,14 @@ export class PlaywrightSniff {
       return;
     }
 
+    this.saveReport();
+    this.generateHTMLReport();
     this.isMonitoring = false;
     this.logger('Stopped monitoring Playwright actions', LogLevel.INFO);
+
+    if(this.hasShowStoppers()) {
+      throw new Error('Test failed due to showstoppers');
+    }
   }
 
   /**
@@ -254,20 +260,23 @@ public saveReport(outputFile?: string): string {
   return filePath;
 }
 
+/**
+ * Generate HTML Report
+ */
 public generateHTMLReport(outputHTML?: string): void {
   let reportData: TestReport;
   const filePath = outputHTML || this.options.outputHTML;
   const jsonFilePath = this.options.outputFile;
   try {
-      const rawData = fs.readFileSync(jsonFilePath, 'utf-8')
-      reportData = JSON.parse(rawData)
+      const rawData = fs.readFileSync(jsonFilePath, 'utf-8');
+      reportData = JSON.parse(rawData);
   } catch (error) {
       this.logger(`Error reading existing json report: ${error}`, LogLevel.ERROR);
-      process.exit(1)
+      process.exit(1);
   }
 
-  const html = generateReportHTML(reportData)
-  fs.writeFileSync(filePath, html)
+  const html = generateReportHTML(reportData);
+  fs.writeFileSync(filePath, html);
 
   this.logger(`HTML Report generated at ${filePath}`, LogLevel.INFO);
 }

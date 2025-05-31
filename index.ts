@@ -5,7 +5,7 @@
  * catches showstoppers, and generates comprehensive reports.
  */
 
-export { PlaywrightSniff } from './monitor';
+export { PlaywrightSniff } from './src/monitor';
 export { 
   ActionTiming, 
   Failure, 
@@ -16,7 +16,7 @@ export {
   SniffOptions, 
   SniffReport ,
   TestReport
-} from './types';
+} from './src/types';
 export { 
   VERSION, 
   calculateAverage, 
@@ -27,4 +27,4 @@ export {
   formatDate, 
   formatDuration, 
   generateTimestamp 
-} from './utils';
+} from './src/utils';
