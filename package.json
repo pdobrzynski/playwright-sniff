@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Monitoring library for Playwright that measures action times, catches showstoppers and generates reports",
   "main": "index.ts",
-  "types": "stc/types.ts",
+  "types": "src/types.ts",
   "scripts": {
     "test": "playwright test"
   },
@@ -32,8 +32,8 @@
     "typescript": "^5.8.3"
   },
   "files": [
-    "src",
-    "examples",
+    "index.ts",
+    "src/",
     "README.md"
   ],
   "engines": {
