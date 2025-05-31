@@ -40,16 +40,8 @@ test('Monitor performance', async ({ page }) => {
     'Click login button'
   );
   
-  // Generate and save report
-  sniff.saveReport();
-  
-  // Stop monitoring
+  // Capture and save final stats
   sniff.stop();
-  
-  // Check for showstoppers
-  if (sniff.hasShowStoppers()) {
-    throw new Error('Test failed due to detected showstoppers');
-  }
 });
 ```
 
@@ -89,6 +81,7 @@ export const test = base.extend<{
       options: sniffOptions // Use the options from the sniffOptions fixture
     });
 
+    // Start monitoring
     await sniff.start();
     sniff.setTestName(testInfo.title)
 
@@ -96,8 +89,6 @@ export const test = base.extend<{
     await use(sniff);
     
     // Capture and save final stats
-    sniff.saveReport();
-    sniff.generateHTMLReport();
     sniff.stop();
   }
 });
@@ -232,8 +223,10 @@ interface SniffReport {
 ### HTML Report
 ![htmlreport](https://github.com/user-attachments/assets/2e041b0d-1c83-4ec8-a128-82280c99b9fd)
 
+## Issues
 
+you can raise any issue [here](https://github.com/pdobrzynski/playwright-sniff/issues)
 
 ## License
 
-MIT
+_- Copyright &copy; 2025- [Patryk Dobrzyński](www.linkedin.com/in/patrykdobrzyński)_
