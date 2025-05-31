@@ -229,4 +229,4 @@ you can raise any issue [here](https://github.com/pdobrzynski/playwright-sniff/i
 
 ## License
 
-_- Copyright &copy; 2025- [Patryk Dobrzyński](www.linkedin.com/in/patrykdobrzyński)_
+- Copyright &copy; 2025- [Patryk Dobrzyński](www.linkedin.com/in/patrykdobrzyński)
