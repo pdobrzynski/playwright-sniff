@@ -1,12 +1,17 @@
 {
   "name": "playwright-sniff",
-  "version": "1.0.2",
+  "version": "1.0.0",
   "description": "Monitoring library for Playwright that measures action times, catches showstoppers and generates reports",
-  "main": "index.ts",
-  "types": "index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "build": "npx tsc",
+    "prepublishOnly": "npm run build",
     "test": "playwright test"
   },
+  "files": [
+    "dist/"
+  ],
   "keywords": [
     "playwright",
     "monitoring",
@@ -30,13 +35,5 @@
     "@playwright/test": "^1.52.0",
     "@types/node": "^20.8.7",
     "typescript": "^5.8.3"
-  },
-  "files": [
-    "index.ts",
-    "src/",
-    "README.md"
-  ],
-  "engines": {
-    "node": ">=14.0.0"
   }
 }
