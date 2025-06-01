@@ -27,7 +27,7 @@ test('Monitor performance', async ({ page }) => {
   const sniff = new PlaywrightSniff({ page });
   
   // Start monitoring
-  sniff.start();
+  await sniff.start();
   
   // Measure specific actions
   await sniff.measureAction(
