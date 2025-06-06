@@ -31,9 +31,10 @@ export const test = base.extend<{
       page,
       options: sniffOptions // Use the options from the sniffOptions fixture
     });
-
-    await sniff.start();
+    
     sniff.setTestName(testInfo.title)
+    await sniff.start();
+    
 
     // Use the sniff instance in the test
     await use(sniff);

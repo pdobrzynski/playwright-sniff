@@ -1,3 +1,4 @@
+import { PlaywrightSniff } from '../src/monitor';
 import { defaultLogger } from '../src/utils';
 import { test, expect } from './sniff-fixture';
 
@@ -13,16 +14,22 @@ import { test, expect } from './sniff-fixture';
 // })
 
 test.describe('Example using playwright-sniff', () => {
-  test('Monitor page performance', async ({ page, sniff }) => {
+  test('Basic usage of playwright-sniff', async ({ page }) => {
     // Initialize the monitoring with the page
-    // sniff = new PlaywrightSniff({
-    //   page,
-    //   options: sniffOptions
-    // });
+    const sniff = new PlaywrightSniff({
+      page,
+      options: {
+        slowThreshold: 2000,
+        outputFile: 'sniffing-results.json',
+        outputHTML: 'sniffing-report.html',
+        captureScreenshots: false,
+        screenshotDir: './screenshots',
+      }
+    });
 
     // Start monitoring
-    // await sniff.start();
-    // sniff.setTestName(test.info().title);
+    sniff.setTestName(test.info().title);
+    await sniff.start();
 
     // Example of measuring navigation action
     await sniff.measureAction(
@@ -44,18 +51,11 @@ test.describe('Example using playwright-sniff', () => {
       'Expects page to have a heading with the name of Installation'
     );
 
-    await sniff.measureAction(
-      async () => {
-        await expect(page.getByRole('button', { name: 'Installation' })).toBeVisible()
-      },
-      'Expects page to have a navbar something something'
-    );
-
     // You can add custom failures
     sniff.addFailure('Example custom failure', 'custom', { additionalInfo: 'test' });
 
     // You can add custom showstoppers
-     //await sniff.addShowStopper('Manual check', 'Found an issue during manual verification');
+    await sniff.addShowStopper('Manual check', 'Found an issue during manual verification');
 
     // Generate and save report
     //const reportPath = sniff.saveReport();
@@ -79,7 +79,7 @@ test.describe('Example using playwright-sniff', () => {
     // sniff.stop();
   });
 
-    test('Dashboard page smoke tests', async ({ page, sniff }) => {
+    test('playwright-sniff from sniff-fixture', async ({ page, sniff }) => {
     // Example of measuring navigation action
     await sniff.measureAction(
       async () => { await page.goto('https://playwright.dev/') },

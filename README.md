@@ -5,7 +5,7 @@ A monitoring library for Playwright that measures action times, catches showstop
 ## Features
 
 - 📊 **Performance Monitoring**: Track execution time for Playwright actions
-- 🚨 **Showstopper Detection**: Identify and log critical issues that block test execution
+- 🚨 **Showstopper Detection**: Identify and log critical issues during the test execution
 - 📝 **Report Generation**: Create detailed reports of test execution performance
 - 🔄 **Low Overhead**: Minimal impact on your existing Playwright tests
 - 🌐 **Network Monitoring**: Track HTTP requests and detect slow or failed requests
@@ -27,8 +27,9 @@ test('Monitor performance', async ({ page }) => {
   const sniff = new PlaywrightSniff({ page });
   
   // Start monitoring
+  sniff.setTestName(test.info().title)
   await sniff.start();
-  
+
   // Measure specific actions
   await sniff.measureAction(
     async () => { await page.goto('https://example.com') },
@@ -36,8 +37,11 @@ test('Monitor performance', async ({ page }) => {
   );
   
   await sniff.measureAction(
-    async () => { await page.getByRole('button').click() },
-    'Click login button'
+    async () => { 
+      await page.getByRole('button').click(),
+      await expect(page.getByRole('heading', { name: 'Welcome!' })).toBeVisible()
+    },
+    'Login to application'
   );
   
   // Capture and save final stats
@@ -60,7 +64,7 @@ export const test = base.extend<{
     // Get default options from PlaywrightSniff class
     const defaultOptions = PlaywrightSniff.DEFAULT_OPTIONS;
     
-    // Get options from playwright.config.ts if available
+    // Get options from playwright.config if available
     const configOptions = testInfo.project.use?.sniffOptions || {};
     
     // Combine defaults with config options
@@ -82,8 +86,8 @@ export const test = base.extend<{
     });
 
     // Start monitoring
-    await sniff.start();
     sniff.setTestName(testInfo.title)
+    await sniff.start();
 
     // Use the sniff instance in the test
     await use(sniff);
@@ -111,7 +115,7 @@ test('Example test with sniffing', async ({ page, sniff }) => {
 ```
 ## Global configuration
 ```typescript
-// You can set global configuration for all tests in playwright.config in the use: {} section
+// Using fixture, you can set global configuration for all tests in playwright.config in the use: {} section
 sniffOptions: {
       slowThreshold: 2000,
       outputFile: 'sniffing-results.json',
@@ -151,8 +155,8 @@ new PlaywrightSniff({ page, options? })
 #### Methods
 
 - `start()`: Start monitoring Playwright actions
-- `stop()`: Stop monitoring
-- `measureAction(action: () => Promise<void>, label: string)`: Measure the execution time of an action/actions
+- `stop()`: Stop monitoring and generate report
+- `measureAction(action: () => Promise<void>, label: string)`: Measure the execution time of actions
 - `addFailure(error: string, type?: 'console' | 'request' | 'custom', metadata?: Record<string, any>)`: Add a custom failure
 - `addShowStopper(label: string, criticalError: string)`: Add a custom showstopper
 - `getResults()`: Get the current monitoring results
@@ -178,7 +182,7 @@ interface ActionTiming {
 
 #### `ShowStopper`
 
-Critical errors that should fail the test.
+Critical errors. (5xx responses, failed actions inside measureAction())
 
 ```typescript
 interface ShowStopper {
@@ -190,7 +194,7 @@ interface ShowStopper {
 
 #### `Failures`
 
-Non-critical fails like console error or 4xx request
+Non-critical fails like console error or 4xx response
 
 ```typescript
 interface Failure {

@@ -81,10 +81,9 @@ export class PlaywrightSniff {
     this.detailedRequestDurations = [];
     this.timings = [];
     this.isMonitoring = true;
-    this.testName = ''
     this.reportData = [];
     
-    this.logger('Started monitoring Playwright actions', LogLevel.INFO);
+    this.logger(`Started monitoring Playwright actions for ${this.testName}`, LogLevel.INFO);
     
     // Set up listeners
     await this.setupSniffingListeners();
@@ -102,7 +101,7 @@ export class PlaywrightSniff {
     this.saveReport();
     this.generateHTMLReport();
     this.isMonitoring = false;
-    this.logger('Stopped monitoring Playwright actions', LogLevel.INFO);
+    this.logger(`Stopped monitoring Playwright actions for ${this.testName}`, LogLevel.INFO);
 
     if(this.hasShowStoppers()) {
       throw new Error('Test failed due to showstoppers');
@@ -139,7 +138,7 @@ export class PlaywrightSniff {
     const duration = Date.now() - start;
     const errorMessage = cleanErrorMessage(error);
     
-    this.timings.push({ label, duration: 0, slow: true, failed: true });
+    this.timings.push({ label, duration: 0, slow: false, failed: true });
     
     this.showStoppers.push({
       label,
@@ -235,12 +234,19 @@ public saveReport(outputFile?: string): string {
   const results = this.getResults();
   const filePath = outputFile || this.options.outputFile;
   
-  let existingData: { reportData: SniffReport[] } = { reportData: [] };
+  let existingData: { reportData: SniffReport[], testRunnerPid?: string } = { reportData: [] };
+  const currentPpid = process.ppid?.toString();
+  let shouldClear = false;
   
   if (fs.existsSync(filePath)) {
     try {
       existingData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
       if (!existingData.reportData || !Array.isArray(existingData.reportData)) {
+        existingData = { reportData: [] };
+      }
+      
+      if (existingData.testRunnerPid && existingData.testRunnerPid !== currentPpid) {
+        shouldClear = true;
         existingData = { reportData: [] };
       }
     } catch (error) {
@@ -249,9 +255,10 @@ public saveReport(outputFile?: string): string {
     }
   }
   
+  existingData.testRunnerPid = currentPpid;
   existingData.reportData.push(results.reportData[0]);
 
-  const action = fs.existsSync(filePath) ? 'updated' : 'created';
+  const action = fs.existsSync(filePath) && !shouldClear ? 'updated' : 'created';
 
   fs.writeFileSync(filePath, JSON.stringify(existingData, null, 2));
   
@@ -276,9 +283,10 @@ public generateHTMLReport(outputHTML?: string): void {
   }
 
   const html = generateReportHTML(reportData);
+  const action = fs.existsSync(filePath) ? 'updated' : 'created';
   fs.writeFileSync(filePath, html);
 
-  this.logger(`HTML Report generated at ${filePath}`, LogLevel.INFO);
+  this.logger(`HTML Report ${action} at ${filePath}`, LogLevel.INFO);
 }
 
   /**

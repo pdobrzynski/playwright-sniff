@@ -76,7 +76,7 @@ export function generateReportHTML(data: TestReport): string {
   // Generate page load steps sections per test
   const pageLoadSections = data.reportData.map((report, index) => {
     const pageLoadRows = report.pageLoadSteps.map(s => `
-      <tr class="${s.slow ? 'slow-row' : ''}">
+      <tr class="${s.slow || s.failed ? 'slow-row' : ''}">
         <td>${s.label}</td>
         ${s.failed ? `<td><span class="critical">✗</span></td>` : `<td>${formatDuration(s.duration, slowThreshold)}</td>`}
       </tr>`).join("");
